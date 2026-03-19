@@ -5,13 +5,17 @@ import { Input } from "@/components/ui/input";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Search, Plus, Edit, Trash2 } from "lucide-react";
 
+import product1 from "@assets/Screenshot_20260319-234309_TikTok_1773954622729.jpg";
+import product2 from "@assets/Screenshot_20260319-234307_TikTok_1773954622753.jpg";
+import product3 from "@assets/Screenshot_20260319-234303_TikTok_1773954622767.jpg";
+import product4 from "@assets/Screenshot_20260319-234314_TikTok_1773954622743.jpg";
+
 const PRODUCTS = [
-  { id: "PRD-001", name: "Radiance Vitamin C Serum", category: "Skincare", price: 85, stock: 15, status: "Active" },
-  { id: "PRD-002", name: "Hydrating Body Lotion", category: "Body Care", price: 45, stock: 24, status: "Active" },
-  { id: "PRD-003", name: "Botanical Cleansing Oil", category: "Skincare", price: 38, stock: 8, status: "Low Stock" },
-  { id: "PRD-004", name: "Rosewater Toner", category: "Skincare", price: 32, stock: 32, status: "Active" },
-  { id: "PRD-005", name: "Overnight Renewal Cream", category: "Skincare", price: 95, stock: 0, status: "Out of Stock" },
-  { id: "PRD-006", name: "Exfoliating Body Scrub", category: "Body Care", price: 42, stock: 18, status: "Active" },
+  { id: "PRD-001", name: "Authentic Henna Paste", category: "Henna Art", price: 35, stock: 150, status: "Active", image: product1 },
+  { id: "PRD-002", name: "Pigmentation Cream Mix", category: "Skincare", price: 65, stock: 45, status: "Active", image: product2 },
+  { id: "PRD-003", name: "Natural Herbal Hair Oil", category: "Hair Care", price: 45, stock: 12, status: "Low Stock", image: product3 },
+  { id: "PRD-004", name: "Luxury Skincare Bundle", category: "Sets", price: 150, stock: 30, status: "Active", image: product4 },
+  { id: "PRD-005", name: "Saffron Face Mask", category: "Skincare", price: 55, stock: 0, status: "Out of Stock", image: product1 },
 ];
 
 export default function AdminProducts() {
@@ -43,6 +47,7 @@ export default function AdminProducts() {
           <Table>
             <TableHeader>
               <TableRow>
+                <TableHead className="w-[80px]">Image</TableHead>
                 <TableHead>Product Name</TableHead>
                 <TableHead>Category</TableHead>
                 <TableHead>Price</TableHead>
@@ -54,9 +59,14 @@ export default function AdminProducts() {
             <TableBody>
               {PRODUCTS.map((product) => (
                 <TableRow key={product.id}>
+                  <TableCell>
+                    <div className="h-10 w-10 rounded overflow-hidden bg-secondary">
+                      <img src={product.image} alt={product.name} className="h-full w-full object-cover" />
+                    </div>
+                  </TableCell>
                   <TableCell className="font-medium">{product.name}</TableCell>
                   <TableCell>{product.category}</TableCell>
-                  <TableCell>${product.price.toFixed(2)}</TableCell>
+                  <TableCell>{product.price.toFixed(2)} AED</TableCell>
                   <TableCell>{product.stock}</TableCell>
                   <TableCell>
                     <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${

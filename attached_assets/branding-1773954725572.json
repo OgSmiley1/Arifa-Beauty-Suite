@@ -1,0 +1,105 @@
+{
+  "colorScheme": "light",
+  "fonts": [
+    {
+      "family": "SohneLeicht",
+      "role": "body"
+    },
+    {
+      "family": "Prelo",
+      "role": "heading"
+    },
+    {
+      "family": "SohneKraftig",
+      "role": "heading"
+    }
+  ],
+  "colors": {
+    "primary": "#776251",
+    "accent": "#776251",
+    "background": "#F8F0E5",
+    "textPrimary": "#776251",
+    "link": "#776251"
+  },
+  "typography": {
+    "fontFamilies": {
+      "primary": "SohneLeicht",
+      "heading": "Prelo"
+    },
+    "fontStacks": {
+      "heading": [
+        "Prelo",
+        "Arial",
+        "Helvetica",
+        "sans-serif",
+        "riyal_symbolregular"
+      ],
+      "body": [
+        "Prelo",
+        "Arial",
+        "Helvetica",
+        "sans-serif",
+        "riyal_symbolregular"
+      ],
+      "paragraph": [
+        "SohneKraftig",
+        "Arial",
+        "Helvetica",
+        "sans-serif",
+        "riyal_symbolregular"
+      ]
+    },
+    "fontSizes": {
+      "h1": "48px",
+      "h2": "48px",
+      "body": "12px"
+    }
+  },
+  "spacing": {
+    "baseUnit": 4,
+    "borderRadius": "0px"
+  },
+  "components": {},
+  "images": {
+    "logo": "File saved at: attached_assets/logo.svg",
+    "favicon": "https://www.vacheron-constantin.com/etc.clientlibs/richemont-vac/ui/clientlibs-main/libs/resources/assets/favicon/favicon.ico",
+    "ogImage": "https://www.vacheron-constantin.com/dam/ric-import-ocp/vac/a12d/5bd3/7YIAEjlcSz2DZuLy2DiE9g.jpeg.transform.vacsocialsharing.jpeg",
+    "logoHref": "/ae/en/home.html"
+  },
+  "__llm_logo_reasoning": {
+    "selectedIndex": 0,
+    "reasoning": "Selected #0 because it is visible, located in the header, medium-sized, and links to the homepage, which is typical for a primary brand logo.",
+    "confidence": 0.95,
+    "source": "llm"
+  },
+  "personality": {
+    "tone": "professional",
+    "energy": "low",
+    "targetAudience": "luxury watch enthusiasts"
+  },
+  "designSystem": {
+    "framework": "custom",
+    "componentLibrary": ""
+  },
+  "confidence": {
+    "buttons": 0,
+    "colors": 0.9,
+    "overall": 0.45
+  },
+  "__llm_metadata": {
+    "logoSelection": {
+      "llmCalled": true,
+      "llmSucceeded": true,
+      "finalSource": "llm",
+      "rawLogoSelection": {
+        "selectedLogoIndex": 0,
+        "selectedLogoReasoning": "Selected #0 because it is visible, located in the header, medium-sized, and links to the homepage, which is typical for a primary brand logo.",
+        "confidence": 0.95
+      }
+    },
+    "buttonClassification": {
+      "llmCalled": false,
+      "llmSucceeded": false
+    }
+  }
+}

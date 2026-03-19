@@ -7,6 +7,9 @@ import NotFound from "@/pages/not-found";
 
 // Public Pages
 import Home from "@/pages/Home";
+import About from "@/pages/About";
+import Contact from "@/pages/Contact";
+import Shop from "@/pages/Shop";
 
 // Admin Pages
 import AdminDashboard from "@/pages/admin/Dashboard";
@@ -17,6 +20,9 @@ function Router() {
     <Switch>
       {/* Public Routes */}
       <Route path="/" component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/contact" component={Contact} />
+      <Route path="/shop" component={Shop} />
       
       {/* Admin Routes */}
       <Route path="/admin" component={AdminDashboard} />
