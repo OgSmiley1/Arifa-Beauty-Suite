@@ -10,7 +10,9 @@ import {
   LogOut,
   Menu,
   X,
+  ExternalLink,
 } from "lucide-react";
+import { useAuth } from "@/lib/auth";
 
 const NAV_ITEMS = [
   { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
@@ -24,6 +26,7 @@ const NAV_ITEMS = [
 export function AdminSidebar() {
   const [location] = useLocation();
   const [isMobileOpen, setIsMobileOpen] = useState(false);
+  const { logout } = useAuth();
 
   const isActive = (path: string) => {
     if (path === "/admin") return location === "/admin";
@@ -61,13 +64,20 @@ export function AdminSidebar() {
         ))}
       </div>
 
-      <div className="p-3 border-t border-sidebar-border">
+      <div className="p-3 border-t border-sidebar-border space-y-1">
         <Link href="/">
           <div className="flex items-center gap-3 px-4 py-3 text-sidebar-foreground/50 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors cursor-pointer">
-            <LogOut className="h-5 w-5" strokeWidth={1.5} />
-            <span className="text-sm font-medium">Exit Admin</span>
+            <ExternalLink className="h-5 w-5" strokeWidth={1.5} />
+            <span className="text-sm font-medium">View Site</span>
           </div>
         </Link>
+        <button
+          onClick={() => logout()}
+          className="w-full flex items-center gap-3 px-4 py-3 text-sidebar-foreground/50 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground transition-colors cursor-pointer"
+        >
+          <LogOut className="h-5 w-5" strokeWidth={1.5} />
+          <span className="text-sm font-medium">Sign Out</span>
+        </button>
       </div>
     </>
   );

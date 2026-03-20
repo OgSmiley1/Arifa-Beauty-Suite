@@ -1,11 +1,13 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "wouter";
 import { Search, ShoppingBag, Menu, X, User } from "lucide-react";
+import { useCart } from "@/lib/cart";
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [location] = useLocation();
+  const { totalItems } = useCart();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 20);
@@ -83,9 +85,11 @@ export function Navbar() {
             </Link>
             <button className="text-foreground/60 hover:text-foreground transition-colors relative" aria-label="Shopping bag">
               <ShoppingBag className="h-5 w-5" strokeWidth={1.5} />
-              <span className="absolute -top-1.5 -right-1.5 bg-foreground text-background text-[9px] w-4 h-4 flex items-center justify-center font-medium">
-                0
-              </span>
+              {totalItems > 0 && (
+                <span className="absolute -top-1.5 -right-1.5 bg-foreground text-background text-[9px] w-4 h-4 flex items-center justify-center font-medium">
+                  {totalItems}
+                </span>
+              )}
             </button>
           </div>
         </div>

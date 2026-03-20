@@ -4,7 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { PRODUCTS, CUSTOMER_REVIEWS, FAQ_ITEMS } from "@/lib/data";
-import { ArrowLeft, Heart, Truck, Shield, Award } from "lucide-react";
+import { ArrowLeft, Heart, Truck, Shield, Award, Check } from "lucide-react";
+import { useCart } from "@/lib/cart";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -78,6 +79,17 @@ export default function ProductPage() {
   const productId = parseInt(params.id || "1", 10);
   const product = PRODUCTS.find((p) => p.id === productId);
   const [activeIngredient, setActiveIngredient] = useState(0);
+  const { addItem, items } = useCart();
+  const [justAdded, setJustAdded] = useState(false);
+
+  const isInCart = items.some((item) => item.id === productId);
+
+  const handleAddToCart = () => {
+    if (!product) return;
+    addItem({ id: product.id, name: product.name, price: product.price, image: product.image });
+    setJustAdded(true);
+    setTimeout(() => setJustAdded(false), 2000);
+  };
 
   if (!product) {
     return (
@@ -150,8 +162,18 @@ export default function ProductPage() {
               </p>
 
               <div className="pt-4 flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 rounded-none px-12 h-14 text-sm tracking-[0.2em] uppercase transition-all duration-300 flex-1">
-                  Add to Cart
+                <Button
+                  size="lg"
+                  onClick={handleAddToCart}
+                  className={`rounded-none px-12 h-14 text-sm tracking-[0.2em] uppercase transition-all duration-300 flex-1 ${
+                    justAdded
+                      ? "bg-emerald-700 text-white hover:bg-emerald-800"
+                      : "bg-foreground text-background hover:bg-foreground/90"
+                  }`}
+                >
+                  {justAdded ? (
+                    <span className="flex items-center gap-2"><Check className="h-4 w-4" /> Added</span>
+                  ) : isInCart ? "Add Another" : "Add to Cart"}
                 </Button>
                 <Button size="lg" variant="outline" className="border-foreground/30 text-foreground hover:bg-foreground/5 hover:border-foreground rounded-none h-14 px-6 transition-all duration-300">
                   <Heart className="h-5 w-5" strokeWidth={1.5} />

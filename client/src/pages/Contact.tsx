@@ -1,10 +1,32 @@
+import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Phone, MessageCircle, Clock, MapPin } from "lucide-react";
+import { Phone, MessageCircle, Clock, MapPin, CheckCircle } from "lucide-react";
+import { apiRequest } from "@/lib/queryClient";
 
 export default function Contact() {
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+    setIsSubmitting(true);
+    try {
+      await apiRequest("POST", "/api/contact", formData);
+      setIsSubmitted(true);
+      setFormData({ name: "", email: "", subject: "", message: "" });
+    } catch {
+      setError("Failed to send message. Please try WhatsApp instead.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -79,31 +101,84 @@ export default function Contact() {
             </div>
 
             <div className="bg-background p-8 md:p-10 border border-border/50">
-              <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                <div className="space-y-2">
-                  <label htmlFor="name" className="text-xs tracking-wider uppercase text-foreground/60">Full Name</label>
-                  <Input id="name" placeholder="Enter your name" className="bg-secondary/30 border-border/50 rounded-none h-12 focus-visible:ring-foreground/20" />
+              {isSubmitted ? (
+                <div className="text-center py-12 space-y-4">
+                  <CheckCircle className="h-12 w-12 text-emerald-600 mx-auto" strokeWidth={1.5} />
+                  <h3 className="text-xl font-serif text-foreground">Message Sent</h3>
+                  <p className="text-foreground/60 font-light">Thank you for reaching out. We'll get back to you shortly.</p>
+                  <button
+                    onClick={() => setIsSubmitted(false)}
+                    className="text-xs tracking-widest uppercase text-foreground/50 hover:text-foreground transition-colors border-b border-foreground/30 pb-0.5 mt-4"
+                  >
+                    Send Another Message
+                  </button>
                 </div>
+              ) : (
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  {error && (
+                    <div className="text-sm text-red-600 bg-red-50 border border-red-200 px-4 py-3 text-center">
+                      {error}
+                    </div>
+                  )}
 
-                <div className="space-y-2">
-                  <label htmlFor="email" className="text-xs tracking-wider uppercase text-foreground/60">Email Address</label>
-                  <Input id="email" type="email" placeholder="Enter your email" className="bg-secondary/30 border-border/50 rounded-none h-12 focus-visible:ring-foreground/20" />
-                </div>
+                  <div className="space-y-2">
+                    <label htmlFor="name" className="text-xs tracking-wider uppercase text-foreground/60">Full Name</label>
+                    <Input
+                      id="name"
+                      value={formData.name}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, name: e.target.value }))}
+                      placeholder="Enter your name"
+                      className="bg-secondary/30 border-border/50 rounded-none h-12 focus-visible:ring-foreground/20"
+                      required
+                    />
+                  </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="subject" className="text-xs tracking-wider uppercase text-foreground/60">Subject</label>
-                  <Input id="subject" placeholder="What is this regarding?" className="bg-secondary/30 border-border/50 rounded-none h-12 focus-visible:ring-foreground/20" />
-                </div>
+                  <div className="space-y-2">
+                    <label htmlFor="email" className="text-xs tracking-wider uppercase text-foreground/60">Email Address</label>
+                    <Input
+                      id="email"
+                      type="email"
+                      value={formData.email}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, email: e.target.value }))}
+                      placeholder="Enter your email"
+                      className="bg-secondary/30 border-border/50 rounded-none h-12 focus-visible:ring-foreground/20"
+                      required
+                    />
+                  </div>
 
-                <div className="space-y-2">
-                  <label htmlFor="message" className="text-xs tracking-wider uppercase text-foreground/60">Message</label>
-                  <Textarea id="message" placeholder="Type your message here..." className="bg-secondary/30 border-border/50 rounded-none min-h-[150px] focus-visible:ring-foreground/20 resize-none" />
-                </div>
+                  <div className="space-y-2">
+                    <label htmlFor="subject" className="text-xs tracking-wider uppercase text-foreground/60">Subject</label>
+                    <Input
+                      id="subject"
+                      value={formData.subject}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, subject: e.target.value }))}
+                      placeholder="What is this regarding?"
+                      className="bg-secondary/30 border-border/50 rounded-none h-12 focus-visible:ring-foreground/20"
+                      required
+                    />
+                  </div>
 
-                <Button className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-none h-14 text-xs tracking-[0.2em] uppercase transition-all">
-                  Send Message
-                </Button>
-              </form>
+                  <div className="space-y-2">
+                    <label htmlFor="message" className="text-xs tracking-wider uppercase text-foreground/60">Message</label>
+                    <Textarea
+                      id="message"
+                      value={formData.message}
+                      onChange={(e) => setFormData((prev) => ({ ...prev, message: e.target.value }))}
+                      placeholder="Type your message here..."
+                      className="bg-secondary/30 border-border/50 rounded-none min-h-[150px] focus-visible:ring-foreground/20 resize-none"
+                      required
+                    />
+                  </div>
+
+                  <Button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full bg-foreground text-background hover:bg-foreground/90 rounded-none h-14 text-xs tracking-[0.2em] uppercase transition-all"
+                  >
+                    {isSubmitting ? "Sending..." : "Send Message"}
+                  </Button>
+                </form>
+              )}
             </div>
           </div>
         </div>

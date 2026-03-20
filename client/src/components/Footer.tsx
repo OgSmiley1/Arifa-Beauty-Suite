@@ -1,6 +1,23 @@
+import { useState } from "react";
 import { Link } from "wouter";
+import { apiRequest } from "@/lib/queryClient";
 
 export function Footer() {
+  const [email, setEmail] = useState("");
+  const [subscribed, setSubscribed] = useState(false);
+
+  const handleSubscribe = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!email) return;
+    try {
+      await apiRequest("POST", "/api/newsletter", { email });
+      setSubscribed(true);
+      setEmail("");
+    } catch {
+      // silently handle
+    }
+  };
+
   return (
     <footer className="bg-foreground text-background">
       <div className="container mx-auto px-4 md:px-8 py-20">
@@ -61,16 +78,23 @@ export function Footer() {
             <p className="text-background/70 text-sm mb-6 font-light">
               Subscribe to receive updates, access to exclusive deals, and new arrivals.
             </p>
-            <form className="flex flex-col space-y-4" onSubmit={(e) => e.preventDefault()}>
-              <input
-                type="email"
-                placeholder="Email address"
-                className="bg-transparent border-b border-background/30 px-0 py-2 text-sm focus:outline-none focus:border-background transition-colors font-light placeholder:text-background/30"
-              />
-              <button type="submit" className="self-start text-xs tracking-[0.2em] uppercase border-b border-background hover:text-background/70 hover:border-background/70 transition-colors pb-1">
-                Subscribe
-              </button>
-            </form>
+            {subscribed ? (
+              <p className="text-sm text-background/80 font-light">Thank you for subscribing!</p>
+            ) : (
+              <form className="flex flex-col space-y-4" onSubmit={handleSubscribe}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="Email address"
+                  className="bg-transparent border-b border-background/30 px-0 py-2 text-sm focus:outline-none focus:border-background transition-colors font-light placeholder:text-background/30"
+                  required
+                />
+                <button type="submit" className="self-start text-xs tracking-[0.2em] uppercase border-b border-background hover:text-background/70 hover:border-background/70 transition-colors pb-1">
+                  Subscribe
+                </button>
+              </form>
+            )}
           </div>
         </div>
 
