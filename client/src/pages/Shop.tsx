@@ -1,89 +1,113 @@
-import { useState } from "react";
 import Layout from "@/components/Layout";
 import { Button } from "@/components/ui/button";
-import { Link, useSearch } from "wouter";
-import { PRODUCTS, CATEGORIES } from "@/lib/data";
+
+import product1 from "@assets/Screenshot_20260319-234309_TikTok_1773954622729.jpg";
+import product2 from "@assets/Screenshot_20260319-234307_TikTok_1773954622753.jpg";
+import product3 from "@assets/Screenshot_20260319-234303_TikTok_1773954622767.jpg";
+import product4 from "@assets/Screenshot_20260319-234314_TikTok_1773954622743.jpg";
+
+const ALL_PRODUCTS = [
+  {
+    id: 1,
+    name: "Authentic Henna Paste",
+    price: 35,
+    category: "Henna Art",
+    image: product1,
+  },
+  {
+    id: 2,
+    name: "Pigmentation Cream Mix",
+    price: 65,
+    category: "Skincare",
+    image: product2,
+  },
+  {
+    id: 3,
+    name: "Natural Herbal Hair Oil",
+    price: 45,
+    category: "Hair Care",
+    image: product3,
+  },
+  {
+    id: 4,
+    name: "Luxury Skincare Bundle",
+    price: 150,
+    category: "Sets",
+    image: product4,
+  }
+];
 
 export default function Shop() {
-  const search = useSearch();
-  const params = new URLSearchParams(search);
-  const initialCategory = params.get("category") || "All";
-  const [activeCategory, setActiveCategory] = useState(initialCategory);
-
-  const filteredProducts = activeCategory === "All"
-    ? PRODUCTS
-    : PRODUCTS.filter((p) => p.category === activeCategory);
-
   return (
     <Layout>
-      <section className="pt-8 pb-12 bg-background border-b border-border/50">
+      <section className="pt-32 pb-12 bg-background border-b border-border/50">
         <div className="container mx-auto px-4 md:px-8 text-center">
-          <span className="text-xs uppercase tracking-[0.2em] text-foreground/50 mb-4 block">Collection</span>
-          <h1 className="text-4xl md:text-6xl font-serif text-foreground mb-6">Our Products</h1>
-          <div className="h-px w-16 bg-foreground/20 mx-auto mb-10"></div>
-          <div className="flex flex-wrap justify-center gap-6 text-sm tracking-widest uppercase">
-            {CATEGORIES.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`pb-1 transition-colors duration-300 cursor-pointer ${
-                  activeCategory === cat
-                    ? "text-foreground font-medium border-b border-foreground"
-                    : "text-foreground/50 hover:text-foreground border-b border-transparent"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
+          <h1 className="text-4xl md:text-5xl font-serif text-foreground mb-6">Our Collection</h1>
+          <div className="h-px w-16 bg-foreground/20 mx-auto mb-8"></div>
+          
+          <div className="flex flex-col md:flex-row justify-between items-center gap-6 mt-12">
+            <div className="flex flex-wrap justify-center md:justify-start gap-6 text-sm tracking-widest uppercase text-foreground/60">
+              <span className="text-foreground font-medium border-b border-foreground pb-1 cursor-pointer">All</span>
+              <span className="hover:text-foreground cursor-pointer transition-colors pb-1">Henna Art</span>
+              <span className="hover:text-foreground cursor-pointer transition-colors pb-1">Skincare</span>
+              <span className="hover:text-foreground cursor-pointer transition-colors pb-1">Hair Care</span>
+              <span className="hover:text-foreground cursor-pointer transition-colors pb-1">Sets</span>
+            </div>
+
+            <div className="flex items-center gap-3 text-sm tracking-widest uppercase text-foreground/60">
+              <span>Sort By:</span>
+              <select className="bg-transparent border-b border-border/50 pb-1 text-foreground focus:outline-none focus:border-foreground transition-colors cursor-pointer appearance-none pr-4">
+                <option value="featured">Featured</option>
+                <option value="newest">Newest Arrivals</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+              </select>
+            </div>
           </div>
         </div>
       </section>
 
       <section className="py-24 bg-background">
         <div className="container mx-auto px-4 md:px-8">
-          {filteredProducts.length === 0 ? (
-            <div className="text-center py-20">
-              <p className="text-foreground/50 font-light text-lg">No products found in this category.</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
-              {filteredProducts.map((product) => (
-                <Link key={product.id} href={`/product/${product.id}`}>
-                  <div className="group cursor-pointer">
-                    <div className="relative aspect-[4/5] overflow-hidden bg-secondary mb-6 border border-border/50">
-                      {product.badge && (
-                        <span className="absolute top-4 left-4 z-10 bg-foreground text-background text-[10px] tracking-[0.15em] uppercase px-3 py-1.5 font-medium">
-                          {product.badge}
-                        </span>
-                      )}
-                      <img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
-                      />
-                      <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-300"></div>
-                      <div className="absolute bottom-0 left-0 w-full translate-y-full group-hover:translate-y-0 transition-transform duration-300">
-                        <Button className="w-full rounded-none bg-foreground text-background hover:bg-foreground/90 h-12 text-xs tracking-widest uppercase">
-                          View Details
-                        </Button>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 md:gap-10">
+            {ALL_PRODUCTS.map((product) => (
+              <Link key={product.id} href={`/product/${product.id}`}>
+                <div className="group cursor-pointer">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-secondary mb-6 border border-border/50">
+                    <img 
+                      src={product.image} 
+                      alt={product.name} 
+                      className="w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-105 opacity-90 group-hover:opacity-100"
+                    />
+                    <div className="absolute inset-0 bg-foreground/0 group-hover:bg-foreground/5 transition-colors duration-300"></div>
+                    
+                    {/* Stock Indicator */}
+                    {product.id === 3 && (
+                      <div className="absolute top-4 left-4 bg-background/90 backdrop-blur-sm px-3 py-1 text-[10px] uppercase tracking-widest border border-border">
+                        Low Stock
                       </div>
-                    </div>
-                    <div className="text-center">
-                      <p className="text-xs text-foreground/50 uppercase tracking-widest mb-2 font-medium">{product.category}</p>
-                      <h3 className="text-lg font-serif text-foreground mb-2 group-hover:text-foreground/70 transition-colors">{product.name}</h3>
-                      <div className="flex justify-center items-center gap-2 mb-2">
-                        <div className="flex text-amber-600 text-sm">
-                          {"★".repeat(5)}
-                        </div>
-                        <span className="text-xs text-foreground/50">({product.reviews})</span>
-                      </div>
-                      <p className="text-foreground font-medium tracking-wide">{product.price} AED</p>
+                    )}
+
+                    <div className="absolute bottom-0 left-0 w-full translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                      <Button className="w-full rounded-none bg-foreground text-background hover:bg-foreground/90 h-12 text-xs tracking-widest uppercase">
+                        View Details
+                      </Button>
                     </div>
                   </div>
-                </Link>
-              ))}
-            </div>
-          )}
+                  <div className="text-center">
+                    <p className="text-xs text-foreground/60 uppercase tracking-widest mb-2 font-medium">{product.category}</p>
+                    <h3 className="text-lg font-serif text-foreground mb-2 group-hover:text-foreground/70 transition-colors">{product.name}</h3>
+                    <div className="flex justify-center items-center gap-2 mb-2">
+                      <div className="flex text-amber-600 text-sm">
+                        {"★".repeat(5)}
+                      </div>
+                    </div>
+                    <p className="text-foreground font-medium">{product.price} AED</p>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       </section>
     </Layout>
