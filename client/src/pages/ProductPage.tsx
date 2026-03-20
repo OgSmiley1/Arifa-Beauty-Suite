@@ -79,6 +79,7 @@ export default function ProductPage() {
   const productId = parseInt(params.id || "1", 10);
   const product = PRODUCTS.find((p) => p.id === productId);
   const [activeIngredient, setActiveIngredient] = useState(0);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
   const { addItem, items } = useCart();
   const [justAdded, setJustAdded] = useState(false);
 
@@ -131,17 +132,36 @@ export default function ProductPage() {
         {/* Product Hero */}
         <section className="container mx-auto px-4 md:px-8 mb-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start">
-            <motion.div className="relative aspect-[4/5] bg-secondary overflow-hidden" variants={itemVariants}>
-              {product.badge && (
-                <span className="absolute top-6 left-6 z-10 bg-foreground text-background text-[10px] tracking-[0.15em] uppercase px-3 py-1.5 font-medium">
-                  {product.badge}
-                </span>
+            <motion.div className="flex flex-col gap-4" variants={itemVariants}>
+              <div className="relative aspect-[4/5] bg-secondary overflow-hidden border border-border/50">
+                {product.badge && (
+                  <span className="absolute top-6 left-6 z-10 bg-foreground text-background text-[10px] tracking-[0.15em] uppercase px-3 py-1.5 font-medium">
+                    {product.badge}
+                  </span>
+                )}
+                <img
+                  src={product.images ? product.images[activeImageIndex] : product.image}
+                  alt={product.name}
+                  className="w-full h-full object-cover object-top transition-all duration-500"
+                />
+              </div>
+              {product.images && product.images.length > 1 && (
+                <div className="grid grid-cols-4 gap-4">
+                  {product.images.map((img, idx) => (
+                    <button
+                      key={idx}
+                      onClick={() => setActiveImageIndex(idx)}
+                      className={`relative aspect-[4/5] overflow-hidden border transition-all duration-300 ${
+                        activeImageIndex === idx 
+                          ? "border-foreground" 
+                          : "border-border/50 opacity-60 hover:opacity-100"
+                      }`}
+                    >
+                      <img src={img} alt={`${product.name} thumbnail ${idx + 1}`} className="w-full h-full object-cover object-top" />
+                    </button>
+                  ))}
+                </div>
               )}
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover object-top"
-              />
             </motion.div>
 
             <motion.div className="flex flex-col justify-center space-y-8 lg:sticky lg:top-32" variants={itemVariants}>
@@ -152,7 +172,14 @@ export default function ProductPage() {
                   <div className="flex text-amber-600 text-sm">{"★".repeat(5)}</div>
                   <span className="text-xs text-foreground/50">({product.reviews} reviews)</span>
                 </div>
-                <p className="text-2xl font-light text-foreground">{product.price} AED</p>
+                <div className="flex items-end gap-3 mb-8">
+                  <p className="text-2xl font-light text-foreground">{product.price} AED</p>
+                  {product.comparePrice && (
+                    <p className="text-lg text-foreground/40 line-through decoration-destructive/50 mb-[2px]">
+                      {product.comparePrice} AED
+                    </p>
+                  )}
+                </div>
               </div>
 
               <div className="h-px w-24 bg-foreground/20"></div>

@@ -7,8 +7,10 @@ export interface Product {
   id: number;
   name: string;
   price: number;
+  comparePrice?: number;
   category: string;
   image: string;
+  images?: string[];
   rating: string;
   reviews: number;
   description: string;
@@ -20,8 +22,10 @@ export const PRODUCTS: Product[] = [
     id: 1,
     name: "Authentic Henna Paste",
     price: 35,
+    comparePrice: 50,
     category: "Henna Art",
     image: product1,
+    images: [product1, product2, product3],
     rating: "5.0",
     reviews: 342,
     description: "Our signature pure henna paste, sourced from the finest natural leaves. Delivers a deep, rich stain that lasts up to two weeks. Perfect for intricate bridal designs and everyday art.",
@@ -31,8 +35,10 @@ export const PRODUCTS: Product[] = [
     id: 2,
     name: "Pigmentation Cream Mix",
     price: 65,
+    comparePrice: 85,
     category: "Skincare",
     image: product2,
+    images: [product2, product1, product4],
     rating: "4.9",
     reviews: 521,
     description: "A luxurious, fast-absorbing cream formulated with a blend of ancient herbal extracts and modern science. Targets hyperpigmentation and uneven skin tone for a brighter, radiant complexion.",
@@ -44,6 +50,7 @@ export const PRODUCTS: Product[] = [
     price: 45,
     category: "Hair Care",
     image: product3,
+    images: [product3, product4, product1],
     rating: "5.0",
     reviews: 189,
     description: "A potent blend of natural herbal extracts designed to strengthen hair roots, reduce hair fall, and promote healthy, lustrous growth. Lightweight and non-greasy formula.",
@@ -52,8 +59,10 @@ export const PRODUCTS: Product[] = [
     id: 4,
     name: "Luxury Skincare Bundle",
     price: 150,
+    comparePrice: 185,
     category: "Sets",
     image: product4,
+    images: [product4, product2, product3],
     rating: "5.0",
     reviews: 97,
     description: "The ultimate self-care package. Includes our bestselling Pigmentation Cream, Herbal Hair Oil, and a complimentary Saffron Face Mask. Save 20% compared to buying individually.",
@@ -65,6 +74,7 @@ export const PRODUCTS: Product[] = [
     price: 55,
     category: "Skincare",
     image: product1,
+    images: [product1, product3, product2],
     rating: "4.8",
     reviews: 156,
     description: "A rich, nourishing face mask infused with pure saffron extract and organic aloe vera. Deeply hydrates, brightens, and revitalizes tired skin in just 15 minutes.",
@@ -73,8 +83,10 @@ export const PRODUCTS: Product[] = [
     id: 6,
     name: "Bridal Henna Cone Set",
     price: 85,
+    comparePrice: 110,
     category: "Henna Art",
     image: product4,
+    images: [product4, product1, product2],
     rating: "5.0",
     reviews: 203,
     description: "Premium henna cone set specially formulated for bridal occasions. Includes 6 cones with extra-dark stain formula, aftercare oil, and detailed design guide.",
