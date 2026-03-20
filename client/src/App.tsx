@@ -16,6 +16,10 @@ import Results from "@/pages/Results";
 // Admin Pages
 import AdminDashboard from "@/pages/admin/Dashboard";
 import AdminProducts from "@/pages/admin/Products";
+import AdminOrders from "@/pages/admin/Orders";
+import AdminCustomers from "@/pages/admin/Customers";
+import AdminTestimonials from "@/pages/admin/Testimonials";
+import AdminSettings from "@/pages/admin/Settings";
 
 function Router() {
   return (
@@ -31,6 +35,10 @@ function Router() {
       {/* Admin Routes */}
       <Route path="/admin" component={AdminDashboard} />
       <Route path="/admin/products" component={AdminProducts} />
+      <Route path="/admin/orders" component={AdminOrders} />
+      <Route path="/admin/customers" component={AdminCustomers} />
+      <Route path="/admin/testimonials" component={AdminTestimonials} />
+      <Route path="/admin/settings" component={AdminSettings} />
       
       {/* Fallback to 404 */}
       <Route component={NotFound} />

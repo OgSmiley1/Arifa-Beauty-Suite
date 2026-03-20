@@ -5,7 +5,7 @@ import {
   ShoppingCart, 
   Users, 
   Settings, 
-  Image as ImageIcon,
+  Star,
   LogOut
 } from "lucide-react";
 
@@ -16,8 +16,8 @@ export function AdminSidebar() {
     { icon: LayoutDashboard, label: "Dashboard", path: "/admin" },
     { icon: Package, label: "Products", path: "/admin/products" },
     { icon: ShoppingCart, label: "Orders", path: "/admin/orders" },
-    { icon: ImageIcon, label: "Slideshow", path: "/admin/slideshow" },
     { icon: Users, label: "Customers", path: "/admin/customers" },
+    { icon: Star, label: "Testimonials", path: "/admin/testimonials" },
     { icon: Settings, label: "Settings", path: "/admin/settings" },
   ];
 
@@ -34,7 +34,7 @@ export function AdminSidebar() {
       
       <div className="flex-1 py-6 flex flex-col gap-2 px-4">
         {navItems.map((item) => {
-          const isActive = location === item.path;
+          const isActive = location === item.path || (location.startsWith(item.path) && item.path !== "/admin");
           return (
             <Link key={item.path} href={item.path}>
               <div 
