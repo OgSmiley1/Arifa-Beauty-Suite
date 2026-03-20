@@ -3,6 +3,13 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { CUSTOMER_REVIEWS } from "@/lib/data";
 import { ArrowRight } from "lucide-react";
+import { TikTokEmbed } from "@/components/TikTokEmbed";
+
+const TIKTOK_VIDEOS = [
+  "https://www.tiktok.com/@arifa.cosmetics/video/7497247111369608466",
+  "https://www.tiktok.com/@arifa.cosmetics/video/7509601656368123143",
+  "https://www.tiktok.com/@arifa.cosmetics/video/7535880880577924370",
+];
 
 export default function Results() {
   return (
@@ -29,26 +36,25 @@ export default function Results() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-            {[
-              { title: "Viral Pigmentation Results", views: "2.4M Views", likes: "150K Likes" },
-              { title: "Henna Art Showcase", views: "1.8M Views", likes: "98K Likes" },
-              { title: "Hair Oil Transformation", views: "950K Views", likes: "72K Likes" },
-            ].map((video, idx) => (
-              <div key={idx} className="bg-background border border-border/50 shadow-sm hover:shadow-lg transition-all duration-500 hover:-translate-y-1">
-                <div className="aspect-[9/16] bg-secondary/50 flex flex-col items-center justify-center text-center p-6">
-                  <svg className="w-12 h-12 mx-auto mb-4 text-foreground/30" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
-                  </svg>
-                  <p className="font-serif text-lg mb-2">{video.title}</p>
-                  <p className="text-xs text-foreground/50 mb-6">{video.views} &bull; {video.likes}</p>
-                  <a href="https://www.tiktok.com/@arifa.cosmetics" target="_blank" rel="noopener noreferrer" className="w-full">
-                    <Button variant="outline" className="border-foreground/30 text-foreground hover:bg-foreground/5 hover:border-foreground rounded-none text-xs uppercase tracking-widest w-full transition-all">
-                      Watch on TikTok
-                    </Button>
-                  </a>
-                </div>
+            {TIKTOK_VIDEOS.map((url, idx) => (
+              <div key={idx} className="bg-background border border-border/50 shadow-sm hover:shadow-lg transition-all duration-500">
+                <TikTokEmbed videoUrl={url} />
               </div>
             ))}
+          </div>
+
+          <div className="mt-12 text-center">
+            <a
+              href="https://www.tiktok.com/@arifa.cosmetics"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 border border-foreground/30 text-foreground hover:bg-foreground hover:text-background px-8 py-4 text-xs tracking-[0.2em] uppercase transition-all duration-300"
+            >
+              <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+              </svg>
+              Follow @arifa.cosmetics
+            </a>
           </div>
         </div>
       </section>
