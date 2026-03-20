@@ -3,6 +3,7 @@ import { Link } from "wouter";
 import { Button } from "@/components/ui/button";
 import { PRODUCTS, CUSTOMER_REVIEWS } from "@/lib/data";
 import { ArrowRight, Shield, Award, Users } from "lucide-react";
+import { TikTokEmbed } from "@/components/TikTokEmbed";
 
 const FEATURED_PRODUCTS = PRODUCTS.slice(0, 3);
 
@@ -151,6 +152,44 @@ export default function Home() {
                 <ArrowRight className="h-3.5 w-3.5 group-hover:translate-x-1 transition-transform" />
               </span>
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured TikTok */}
+      <section className="py-28 bg-background border-t border-border/50">
+        <div className="container mx-auto px-4 md:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center max-w-5xl mx-auto">
+            <div className="text-center lg:text-left">
+              <span className="text-xs uppercase tracking-[0.2em] text-foreground/50 mb-4 block">@arifa.cosmetics</span>
+              <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-6">Follow Us on TikTok</h2>
+              <div className="h-px w-16 bg-foreground/20 mb-8 mx-auto lg:mx-0"></div>
+              <p className="text-foreground/60 font-light leading-relaxed mb-8">
+                Watch real transformations, henna art showcases, and skincare routines from our community. Over 40K+ followers trust Arifa for authentic beauty.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
+                <a
+                  href="https://www.tiktok.com/@arifa.cosmetics"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center gap-2 bg-foreground text-background px-8 py-4 text-xs tracking-[0.2em] uppercase hover:bg-foreground/90 transition-colors"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                  </svg>
+                  Follow on TikTok
+                </a>
+                <Link href="/results">
+                  <span className="inline-flex items-center justify-center gap-2 border border-foreground/30 text-foreground px-8 py-4 text-xs tracking-[0.2em] uppercase hover:bg-foreground/5 hover:border-foreground transition-all cursor-pointer">
+                    See All Results
+                    <ArrowRight className="h-3.5 w-3.5" />
+                  </span>
+                </Link>
+              </div>
+            </div>
+            <div>
+              <TikTokEmbed videoUrl="https://www.tiktok.com/@arifa.cosmetics/video/7545606435430780168" />
+            </div>
           </div>
         </div>
       </section>
