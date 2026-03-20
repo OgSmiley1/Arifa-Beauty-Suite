@@ -4,8 +4,8 @@
 @custom-variant dark (&:is(.dark *));
 
 @theme inline {
-  --font-sans: 'SohneLeicht', 'Jost', sans-serif;
-  --font-serif: 'Prelo', 'Jost', sans-serif;
+  --font-sans: 'Jost', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, serif;
 
   --color-background: hsl(var(--background));
   --color-foreground: hsl(var(--foreground));
@@ -26,7 +26,7 @@
   --color-border: hsl(var(--border));
   --color-input: hsl(var(--input));
   --color-ring: hsl(var(--ring));
-  
+
   --color-sidebar: hsl(var(--sidebar));
   --color-sidebar-foreground: hsl(var(--sidebar-foreground));
   --color-sidebar-primary: hsl(var(--sidebar-primary));
@@ -43,48 +43,46 @@
 }
 
 :root {
-  /* Vacheron Constantin Inspired Palette */
-  /* Background: #F8F0E5 -> HSL(35, 61%, 94%) */
-  --background: 35 61% 94%; 
-  /* Primary/Text: #776251 -> HSL(27, 19%, 39%) */
-  --foreground: 27 19% 39%; 
-  
-  --card: 35 61% 96%;
-  --card-foreground: 27 19% 39%;
-  
-  --popover: 35 61% 96%;
-  --popover-foreground: 27 19% 39%;
-  
-  --primary: 27 19% 39%; 
+  /* Vacheron Constantin Inspired Palette - Warm Champagne Luxury */
+  --background: 35 61% 94%;
+  --foreground: 25 20% 28%;
+
+  --card: 35 50% 96%;
+  --card-foreground: 25 20% 28%;
+
+  --popover: 35 50% 96%;
+  --popover-foreground: 25 20% 28%;
+
+  --primary: 27 22% 35%;
   --primary-foreground: 35 61% 94%;
-  
+
   --secondary: 35 30% 88%;
-  --secondary-foreground: 27 19% 39%;
-  
-  --muted: 35 30% 88%;
-  --muted-foreground: 27 15% 50%;
-  
-  --accent: 35 40% 90%;
-  --accent-foreground: 27 19% 39%;
-  
+  --secondary-foreground: 25 20% 28%;
+
+  --muted: 35 25% 88%;
+  --muted-foreground: 25 12% 50%;
+
+  --accent: 30 35% 90%;
+  --accent-foreground: 25 20% 28%;
+
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
-  
-  --border: 27 19% 80%;
-  --input: 27 19% 80%;
-  --ring: 27 19% 39%;
+
+  --border: 30 15% 82%;
+  --input: 30 15% 82%;
+  --ring: 27 22% 35%;
 
   /* Admin Sidebar */
-  --sidebar: 35 61% 96%;
-  --sidebar-foreground: 27 19% 39%;
-  --sidebar-primary: 27 19% 39%;
-  --sidebar-primary-foreground: 35 61% 94%;
-  --sidebar-accent: 35 30% 88%;
-  --sidebar-accent-foreground: 27 19% 39%;
-  --sidebar-border: 27 19% 80%;
-  --sidebar-ring: 27 19% 39%;
+  --sidebar: 25 20% 18%;
+  --sidebar-foreground: 35 30% 88%;
+  --sidebar-primary: 30 35% 55%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 25 18% 24%;
+  --sidebar-accent-foreground: 35 30% 88%;
+  --sidebar-border: 25 15% 25%;
+  --sidebar-ring: 30 35% 55%;
 
-  --radius: 0; /* Sharp, luxury edges like Vacheron */
+  --radius: 0;
 }
 
 @layer base {
@@ -97,4 +95,38 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif tracking-wide font-normal;
   }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom selection color */
+::selection {
+  background-color: hsl(27 22% 35% / 0.2);
+  color: hsl(25 20% 18%);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: hsl(35 61% 94%);
+}
+::-webkit-scrollbar-thumb {
+  background: hsl(27 22% 35% / 0.3);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(27 22% 35% / 0.5);
+}
+
+/* Spinning badge animation for product page */
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
 }
