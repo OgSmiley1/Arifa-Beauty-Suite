@@ -10,6 +10,7 @@ import Home from "@/pages/Home";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import Shop from "@/pages/Shop";
+import ProductPage from "@/pages/ProductPage";
 
 // Admin Pages
 import AdminDashboard from "@/pages/admin/Dashboard";
@@ -23,6 +24,7 @@ function Router() {
       <Route path="/about" component={About} />
       <Route path="/contact" component={Contact} />
       <Route path="/shop" component={Shop} />
+      <Route path="/product/:id" component={ProductPage} />
       
       {/* Admin Routes */}
       <Route path="/admin" component={AdminDashboard} />
