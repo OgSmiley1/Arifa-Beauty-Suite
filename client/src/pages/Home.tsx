@@ -70,25 +70,28 @@ export default function Home() {
           />
         </div>
         
-        <div className="relative z-10 text-center px-4 max-w-3xl mx-auto flex flex-col items-center">
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto flex flex-col items-center pt-10">
           <span className="text-foreground uppercase tracking-[0.3em] text-sm mb-6 font-medium animate-in slide-in-from-bottom-4 fade-in duration-700 delay-150 fill-mode-both border-b border-foreground/30 pb-2">
             UAE Licensed Seller
           </span>
           <h1 className="text-5xl md:text-7xl font-serif text-foreground mb-6 leading-tight animate-in slide-in-from-bottom-6 fade-in duration-700 delay-300 fill-mode-both">
-            Arifa Cosmetics
+            Discover the Secret to Flawless Skin, Loved by Thousands on TikTok
           </h1>
-          <p className="text-foreground/80 text-lg md:text-xl font-light mb-10 max-w-xl mx-auto animate-in slide-in-from-bottom-8 fade-in duration-700 delay-500 fill-mode-both">
-            Discover our premium selection of authentic henna, custom skincare mixes, and natural hair care products. Trusted by over 40,000 customers in the UAE.
+          <p className="text-foreground/80 text-lg md:text-xl font-light mb-10 max-w-2xl mx-auto animate-in slide-in-from-bottom-8 fade-in duration-700 delay-500 fill-mode-both">
+            Experience our premium selection of authentic henna, custom skincare mixes, and natural hair care products. 
           </p>
           <div className="animate-in slide-in-from-bottom-10 fade-in duration-700 delay-700 fill-mode-both flex gap-4 flex-col sm:flex-row">
             <Link href="/shop">
               <Button size="lg" className="bg-foreground text-background hover:bg-foreground/90 rounded-none px-12 h-14 text-sm tracking-[0.2em] uppercase transition-all duration-300 w-full sm:w-auto">
-                Explore Collection
+                Shop The Collection
               </Button>
             </Link>
-            <Link href="/contact">
-              <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground/5 rounded-none px-12 h-14 text-sm tracking-[0.2em] uppercase transition-all duration-300 w-full sm:w-auto">
-                Contact Us
+            <Link href="/results">
+              <Button size="lg" variant="outline" className="border-foreground text-foreground hover:bg-foreground/5 rounded-none px-12 h-14 text-sm tracking-[0.2em] uppercase transition-all duration-300 w-full sm:w-auto flex items-center gap-2">
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1.04-.1z"/>
+                </svg>
+                See TikTok Results
               </Button>
             </Link>
           </div>
@@ -150,7 +153,7 @@ export default function Home() {
       <section className="py-24 bg-secondary">
         <div className="container mx-auto px-4 md:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-6">Customer Reviews</h2>
+            <h2 className="text-3xl md:text-4xl font-serif text-foreground mb-6">What Our Customers Say</h2>
             <div className="h-px w-24 bg-foreground/20 mx-auto"></div>
           </div>
           
