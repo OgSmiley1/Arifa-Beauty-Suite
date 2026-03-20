@@ -1,6 +1,27 @@
 import AdminLayout from "@/components/AdminLayout";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Package, DollarSign, ShoppingCart, TrendingUp } from "lucide-react";
+import { Package, DollarSign, ShoppingCart, Users, TrendingUp, TrendingDown } from "lucide-react";
+
+const STATS = [
+  { title: "Total Revenue", value: "12,450 AED", change: "+15%", trend: "up", icon: DollarSign },
+  { title: "Orders", value: "145", change: "+8%", trend: "up", icon: ShoppingCart },
+  { title: "Products", value: "24", change: "3 low stock", trend: "neutral", icon: Package },
+  { title: "Active Customers", value: "892", change: "+12%", trend: "up", icon: Users },
+];
+
+const RECENT_ORDERS = [
+  { id: "ORD-001", customer: "Emma Thompson", date: "Today", total: "120.00 AED", status: "Processing" },
+  { id: "ORD-002", customer: "Sarah Jenkins", date: "Yesterday", total: "85.00 AED", status: "Shipped" },
+  { id: "ORD-003", customer: "Michael Chen", date: "Yesterday", total: "210.00 AED", status: "Shipped" },
+  { id: "ORD-004", customer: "Jessica Davis", date: "Mar 18", total: "45.00 AED", status: "Delivered" },
+];
+
+const TOP_PRODUCTS = [
+  { name: "Pigmentation Cream Mix", sales: 42, stock: 15 },
+  { name: "Authentic Henna Paste", sales: 38, stock: 24 },
+  { name: "Natural Herbal Hair Oil", sales: 25, stock: 8 },
+  { name: "Saffron Glow Face Mask", sales: 18, stock: 32 },
+];
 
 export default function AdminDashboard() {
   return (
@@ -11,85 +32,43 @@ export default function AdminDashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Total Revenue</CardTitle>
-            <DollarSign className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">$12,450.00</div>
-            <p className="text-xs text-muted-foreground mt-1 flex items-center text-emerald-600">
-              <TrendingUp className="h-3 w-3 mr-1" />
-              +15% from last month
-            </p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Orders</CardTitle>
-            <ShoppingCart className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">145</div>
-            <p className="text-xs text-muted-foreground mt-1 flex items-center text-emerald-600">
-              <TrendingUp className="h-3 w-3 mr-1" />
-              +8% from last month
-            </p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Products</CardTitle>
-            <Package className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">24</div>
-            <p className="text-xs text-muted-foreground mt-1">
-              3 low in stock
-            </p>
-          </CardContent>
-        </Card>
-        
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-muted-foreground">Active Customers</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">892</div>
-            <p className="text-xs text-muted-foreground mt-1 flex items-center text-emerald-600">
-              <TrendingUp className="h-3 w-3 mr-1" />
-              +12% from last month
-            </p>
-          </CardContent>
-        </Card>
+        {STATS.map((stat) => (
+          <Card key={stat.title} className="hover:shadow-md transition-shadow">
+            <CardHeader className="flex flex-row items-center justify-between pb-2">
+              <CardTitle className="text-sm font-medium text-muted-foreground">{stat.title}</CardTitle>
+              <stat.icon className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stat.value}</div>
+              <p className={`text-xs mt-1 flex items-center ${
+                stat.trend === "up" ? "text-emerald-600" : "text-muted-foreground"
+              }`}>
+                {stat.trend === "up" && <TrendingUp className="h-3 w-3 mr-1" />}
+                {stat.change} {stat.trend === "up" ? "from last month" : ""}
+              </p>
+            </CardContent>
+          </Card>
+        ))}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <Card className="col-span-2">
+        <Card className="col-span-1 lg:col-span-2">
           <CardHeader>
             <CardTitle>Recent Orders</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {[
-                { id: "ORD-001", customer: "Emma Thompson", date: "Today", total: "$120.00", status: "Processing" },
-                { id: "ORD-002", customer: "Sarah Jenkins", date: "Yesterday", total: "$85.00", status: "Shipped" },
-                { id: "ORD-003", customer: "Michael Chen", date: "Yesterday", total: "$210.00", status: "Shipped" },
-                { id: "ORD-004", customer: "Jessica Davis", date: "Oct 12", total: "$45.00", status: "Delivered" },
-              ].map((order) => (
+              {RECENT_ORDERS.map((order) => (
                 <div key={order.id} className="flex items-center justify-between border-b border-border pb-4 last:border-0 last:pb-0">
                   <div>
-                    <p className="font-medium">{order.customer}</p>
-                    <p className="text-xs text-muted-foreground">{order.id} • {order.date}</p>
+                    <p className="font-medium text-sm">{order.customer}</p>
+                    <p className="text-xs text-muted-foreground">{order.id} &bull; {order.date}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-medium">{order.total}</p>
+                    <p className="font-medium text-sm">{order.total}</p>
                     <p className={`text-xs ${
-                      order.status === 'Processing' ? 'text-amber-600' : 
-                      order.status === 'Shipped' ? 'text-blue-600' : 'text-emerald-600'
+                      order.status === "Processing" ? "text-amber-600" :
+                      order.status === "Shipped" ? "text-blue-600" : "text-emerald-600"
                     }`}>
                       {order.status}
                     </p>
@@ -99,26 +78,21 @@ export default function AdminDashboard() {
             </div>
           </CardContent>
         </Card>
-        
+
         <Card>
           <CardHeader>
             <CardTitle>Top Products</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {[
-                { name: "Radiance Vitamin C Serum", sales: 42, stock: 15 },
-                { name: "Hydrating Body Lotion", sales: 38, stock: 24 },
-                { name: "Botanical Cleansing Oil", sales: 25, stock: 8 },
-                { name: "Rosewater Toner", sales: 18, stock: 32 },
-              ].map((product, i) => (
+              {TOP_PRODUCTS.map((product, i) => (
                 <div key={i} className="flex items-center justify-between border-b border-border pb-4 last:border-0 last:pb-0">
                   <div>
                     <p className="font-medium text-sm line-clamp-1">{product.name}</p>
                     <p className="text-xs text-muted-foreground">{product.sales} sales this month</p>
                   </div>
                   <div className="text-right text-sm">
-                    <span className={product.stock < 10 ? "text-destructive" : "text-muted-foreground"}>
+                    <span className={product.stock < 10 ? "text-destructive font-medium" : "text-muted-foreground"}>
                       {product.stock} in stock
                     </span>
                   </div>
@@ -129,28 +103,5 @@ export default function AdminDashboard() {
         </Card>
       </div>
     </AdminLayout>
-  );
-}
-
-// Added mock Users icon missing from import
-function Users(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
-      <circle cx="9" cy="7" r="4" />
-      <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
-      <path d="M16 3.13a4 4 0 0 1 0 7.75" />
-    </svg>
   );
 }
